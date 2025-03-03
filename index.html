@@ -71,12 +71,6 @@
             font-size: 1rem;
         }
         
-        .fixed-value {
-            color: var(--gray-700);
-            background-color: var(--gray-50);
-            pointer-events: none;
-        }
-        
         button {
             background-color: var(--primary);
             color: white;
@@ -196,12 +190,12 @@
                 
                 <div class="input-group">
                     <label for="annual-rate">Taxa de Juros Anual (%)</label>
-                    <input type="number" id="annual-rate" class="fixed-value" value="13.25" readonly>
+                    <input type="number" id="annual-rate" value="13.25" min="0" max="100" step="0.01" required>
                 </div>
                 
                 <div class="input-group">
                     <label for="installments">Número de Parcelas</label>
-                    <input type="number" id="installments" class="fixed-value" value="8" readonly>
+                    <input type="number" id="installments" value="8" min="2" max="60" required>
                 </div>
                 
                 <div class="input-group">
@@ -272,6 +266,16 @@
             // Validação básica
             if (isNaN(totalValue) || totalValue <= 0) {
                 alert('Por favor, informe um valor total válido.');
+                return;
+            }
+            
+            if (isNaN(annualRate) || annualRate < 0) {
+                alert('Por favor, informe uma taxa de juros válida.');
+                return;
+            }
+            
+            if (isNaN(installments) || installments < 2) {
+                alert('Por favor, informe um número de parcelas válido (mínimo 2).');
                 return;
             }
             
